@@ -1,0 +1,24 @@
+bamsgrave.config.title=BaM's Grave Configuration
+bamsgrave.config.ctgy.tombstone=Tombstone Settings
+bamsgrave.config.ctgy.tombstone.tooltip=Settings related to the tombstone.
+bamsgrave.config.ctgy.coffin=Coffin Settings
+bamsgrave.config.ctgy.coffin.tooltip=Settings related to the coffin.
+
+bamsgrave.config.GravesForCreativeMode=Creative Mode Graves
+bamsgrave.config.GravesForCreativeMode.tooltip=Set to true to make graves in Creative Mode.
+bamsgrave.config.BlocksBlacklist=Blocks Blacklist
+bamsgrave.config.BlocksBlacklist.tooltip=Blocks that are protected during grave placement.
+
+bamsgrave.config.NeedSignToMakeSign=Require Sign
+bamsgrave.config.NeedSignToMakeSign.tooltip=Set to true to require a sign during tombstone creation.
+bamsgrave.config.FlowerPot=Flower Pot
+bamsgrave.config.FlowerPot.tooltip=Flower pot placed on top of the tombstone.
+bamsgrave.config.DefaultTombstone=Default Tombstone
+bamsgrave.config.DefaultTombstone.tooltip=Default tombstone if not defined in the list of Tombstones.
+bamsgrave.config.Tombstones=Tombstones
+bamsgrave.config.Tombstones.tooltip=List of tombstones. Syntax: <GroundBlock>;<TombstoneBlock>
+
+bamsgrave.config.NeedChestToMakeCoffin=Require Chests
+bamsgrave.config.NeedChestToMakeCoffin.tooltip=Set to true to require chests in the inventory during coffin creation.
+bamsgrave.config.StoreXP=Store Experience
+bamsgrave.config.StoreXP.tooltip=Set to true to store Bottles o' Enchanting in graves.
