@@ -17,9 +17,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class GraveDigger {
     private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,6 +37,7 @@ public class GraveDigger {
     private BlockPos chestPos2;
 
     private EntityPlayer player;
+    private List<IInventory> inventories = new ArrayList<IInventory>();
 
     public GraveDigger(EntityPlayer player) {
         this(player.getDisplayName().getUnformattedText(), player.inventory, player.worldObj, new BlockPos(player.posX, player.posY, player.posZ), player.getHorizontalFacing());
@@ -72,6 +71,12 @@ public class GraveDigger {
 
     public void setPlayer(EntityPlayer player) {
         this.player = player;
+    }
+
+    public void addInventory(IInventory inventory) {
+        if (inventory != null) {
+            inventories.add(inventory);
+        }
     }
 
     public void dig() {
@@ -225,6 +230,15 @@ public class GraveDigger {
                 ItemStack stack = inventory.removeStackFromSlot(i);
                 if (stack != null) {
                     chestInv.setInventorySlotContents(slot++, stack);
+                }
+            }
+
+            for (IInventory inventory : inventories) {
+                for (int i = 0; i < inventory.getSizeInventory() && slot < chestInv.getSizeInventory(); i++) {
+                    ItemStack stack = inventory.removeStackFromSlot(i);
+                    if (stack != null) {
+                        chestInv.setInventorySlotContents(slot++, stack);
+                    }
                 }
             }
 
