@@ -1,5 +1,6 @@
 package io.github.mribby.bamsgrave;
 
+import io.github.mribby.bamsgrave.repackage.baubles.api.BaublesApi;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockStandingSign;
@@ -16,13 +17,9 @@ import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class GraveDigger {
-    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
-
     private final String name;
     private final IInventory inventory;
     private final World world;
@@ -37,11 +34,14 @@ public class GraveDigger {
     private BlockPos chestPos2;
 
     private EntityPlayer player;
+    private boolean isCreative;
     private List<IInventory> inventories = new ArrayList<IInventory>();
 
     public GraveDigger(EntityPlayer player) {
         this(player.getDisplayName().getUnformattedText(), player.inventory, player.worldObj, new BlockPos(player.posX, player.posY, player.posZ), player.getHorizontalFacing());
         setPlayer(player);
+        setCreative(player.capabilities.isCreativeMode);
+        addInventory(BaublesApi.getBaubles(player));
     }
 
     /**
@@ -55,7 +55,7 @@ public class GraveDigger {
         this.name = name;
         this.inventory = inventory;
         this.world = world;
-        this.pos = pos;
+        this.pos = pos.getY() >= BaMsConfig.minimumHeight ? pos : new BlockPos(pos.getX(), BaMsConfig.minimumHeight, pos.getZ());
         this.facing = facing;
         this.oppositeFacing = facing.getOpposite();
         init();
@@ -71,6 +71,10 @@ public class GraveDigger {
 
     public void setPlayer(EntityPlayer player) {
         this.player = player;
+    }
+
+    public void setCreative(boolean isCreative) {
+        this.isCreative = isCreative;
     }
 
     public void addInventory(IInventory inventory) {
@@ -109,7 +113,7 @@ public class GraveDigger {
 
         // Return if no chest found
         if (chestBlock == null) {
-            if (!BaMsConfig.needChestToMakeCoffin) {
+            if (!BaMsConfig.needChestToMakeCoffin || isCreative) {
                 chestBlock = Blocks.chest;
                 chestCount = 2;
             } else {
@@ -134,7 +138,7 @@ public class GraveDigger {
 
         // Find and take one sign
         boolean hasSign = false;
-        if (BaMsConfig.needSignToMakeSign) {
+        if (BaMsConfig.needSignToMakeSign || isCreative) {
             for (int i = 0; i < inventory.getSizeInventory(); i++) {
                 ItemStack stack = inventory.getStackInSlot(i);
                 if (stack != null && stack.getItem() == Items.sign) {
@@ -174,8 +178,8 @@ public class GraveDigger {
             Date date = new Date();
             IChatComponent[] text = ((TileEntitySign) te).signText;
             text[0] = new ChatComponentText(name);
-            text[2] = new ChatComponentText(DAY_FORMAT.format(date));
-            text[3] = new ChatComponentText(TIME_FORMAT.format(date));
+            text[2] = new ChatComponentText(BaMsConfig.getFormattedDate(date));
+            text[3] = new ChatComponentText(BaMsConfig.getFormattedTime(date));
         }
     }
 
@@ -200,7 +204,7 @@ public class GraveDigger {
     }
 
     private void takeChest(Block chestBlock) {
-        if (BaMsConfig.needChestToMakeCoffin) {
+        if (BaMsConfig.needChestToMakeCoffin || isCreative) {
             for (int i = 0; i < inventory.getSizeInventory(); i++) {
                 ItemStack stack = inventory.getStackInSlot(i);
                 if (stack != null && Block.getBlockFromItem(stack.getItem()) == chestBlock) {

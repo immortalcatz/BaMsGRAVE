@@ -4,13 +4,23 @@ bamsgrave.config.ctgy.tombstone.tooltip=Settings related to the tombstone.
 bamsgrave.config.ctgy.coffin=Coffin Settings
 bamsgrave.config.ctgy.coffin.tooltip=Settings related to the coffin.
 
+bamsgrave.config.MinimumHeight=Minimum Height
+bamsgrave.config.MinimumHeight.tooltip=The minimum height to place graves.
 bamsgrave.config.GravesForCreativeMode=Creative Mode Graves
 bamsgrave.config.GravesForCreativeMode.tooltip=Set to true to make graves in Creative Mode.
+bamsgrave.config.UseBlocksWhitelist=Use Blocks Whitelist
+bamsgrave.config.UseBlocksWhitelist.tooltip=Set this to true to use the blocks whitelist; false to use the blacklist.
+bamsgrave.config.BlocksWhitelist=Blocks Whitelist
+bamsgrave.config.BlocksWhitelist.tooltip=Blocks that are not protected during grave placement.
 bamsgrave.config.BlocksBlacklist=Blocks Blacklist
 bamsgrave.config.BlocksBlacklist.tooltip=Blocks that are protected during grave placement.
 
 bamsgrave.config.NeedSignToMakeSign=Require Sign
 bamsgrave.config.NeedSignToMakeSign.tooltip=Set to true to require a sign during tombstone creation.
+bamsgrave.config.DateFormat=Date Format
+bamsgrave.config.DateFormat.tooltip=The date format used when engraving the tombstone.
+bamsgrave.config.TimeFormat=Time Format
+bamsgrave.config.TimeFormat.tooltip=The time format used when engraving the tombstone.
 bamsgrave.config.FlowerPot=Flower Pot
 bamsgrave.config.FlowerPot.tooltip=Flower pot placed on top of the tombstone.
 bamsgrave.config.DefaultTombstone=Default Tombstone

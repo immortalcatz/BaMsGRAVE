@@ -1,6 +1,5 @@
 package io.github.mribby.bamsgrave;
 
-import io.github.mribby.bamsgrave.repackage.baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -47,7 +46,6 @@ public class BaMsGrave {
             boolean isSurvival = !player.capabilities.isCreativeMode;
             if (isSurvival || BaMsConfig.isCreativeEnabled) {
                 GraveDigger digger = new GraveDigger(player);
-                digger.addInventory(BaublesApi.getBaubles(player));
                 digger.dig();
             }
         }
